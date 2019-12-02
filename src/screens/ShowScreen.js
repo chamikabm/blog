@@ -27,7 +27,7 @@ const Header = ({ navigation }) => {
   return (
       <TouchableOpacity
           style={styles.editButton}
-          onPress={() => navigation.navigate('Edit')}
+          onPress={() => navigation.navigate('Edit', { id : navigation.getParam('id') })}
       >
         <EvilIcons name={'pencil'} size={30}/>
       </TouchableOpacity>
