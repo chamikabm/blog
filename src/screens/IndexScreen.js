@@ -41,6 +41,23 @@ const IndexScreen = ({ navigation }) => {
   );
 };
 
+const Header = ({ navigation }) => {
+  return (
+      <TouchableOpacity
+          style={styles.createButton}
+          onPress={() => navigation.navigate('Create')}
+      >
+        <Feather name={'plus'} size={30}/>
+      </TouchableOpacity>
+  );
+};
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: <Header navigation={navigation}/>
+  }
+};
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
@@ -55,6 +72,9 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
+  },
+  createButton: {
+    marginRight: 5,
   }
 });
 
