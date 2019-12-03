@@ -1,12 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, FlatList, Button, TouchableOpacity,
+  View, Text, StyleSheet, FlatList, TouchableOpacity,
 } from 'react-native';
 import { Context } from '../context/BlogContext';
 import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, deleteBlogPost} = useContext(Context);
+  const { state, deleteBlogPost, getBlogPosts } = useContext(Context);
+
+  // useEffect is used to run the code only one time when a component is
+  // first rendered. [] array indicate that it should run only a one time.
+  useEffect(() => {
+    getBlogPosts();
+    const listener = navigation.addListener('didFocus', () => {
+      getBlogPosts();
+    });
+
+    // If we return function from the `useEffect` hook, it will only be invoked
+    // if the current screen (i.e IndexScreen) is every completely stop showing. (i.e unmounted)
+    return () => {
+      listener.remove()
+    }
+  }, []);
+
 
   return (
       <View>
